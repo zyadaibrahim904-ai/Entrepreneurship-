@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>موسوعة ريادة الأعمال</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color:   #0f172a;
+            --card-bg:    #1e293b;
+            --text-main:  #f8fafc;
+            --text-muted: #94a3b8;
+            --primary:    #38bdf8;
+            --accent-1:   #10b981;
+            --accent-2:   #f59e0b;
+            --border:     #334155;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { font-size: 16px; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* شبكة خلفية */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            background-size: 35px 35px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* جزيئات عائمة */
+        .particle {
+            position: fixed;
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatParticle {
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            10%  { opacity: 0.5; }
+            90%  { opacity: 0.2; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* ===== الكارت الرئيسي ===== */
+        .main-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: clamp(28px, 6vw, 52px) clamp(20px, 5vw, 44px);
+            border-radius: clamp(18px, 3vw, 28px);
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: cardEntrance 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes cardEntrance {
+            from { opacity: 0; transform: translateY(35px) scale(0.97); filter: blur(10px); }
+            to   { opacity: 1; transform: translateY(0)   scale(1);    filter: blur(0); }
+        }
+
+        /* ===== أيقونة الصاروخ ===== */
+        .icon-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: clamp(14px, 3vw, 20px);
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-6px); }
+        }
+
+        .rocket-icon {
+            font-size: clamp(2.4rem, 6vw, 3.4rem);
+            filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.6));
+        }
+
+        /* ===== شارة الحالة ===== */
+        .welcome-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 6px 16px;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--primary);
+            border-radius: 100px;
+            font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: clamp(16px, 3vw, 22px);
+            animation: pulseBadge 2.8s infinite ease-in-out;
+            white-space: nowrap;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); }
+            50%       { box-shadow: 0 0 28px rgba(56, 189, 248, 0.3); }
+        }
+
+        /* ===== العنوان ===== */
+        h1 {
+            font-size: clamp(1.6rem, 5vw, 2.3rem);
+            font-weight: 900;
+            margin: 0 0 8px 0;
+            color: var(--primary);
+            line-height: 1.25;
+        }
+
+        .subtitle {
+            font-size: clamp(0.75rem, 2vw, 0.88rem);
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        p.desc {
+            color: var(--text-muted);
+            font-size: clamp(0.82rem, 2.2vw, 0.92rem);
+            line-height: 1.75;
+            margin: 0 0 clamp(24px, 4vw, 36px) 0;
+            font-weight: 400;
+        }
+
+        /* ===== إحصائيات ===== */
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: clamp(20px, 4vw, 32px);
+            padding: clamp(12px, 2.5vw, 16px) 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            gap: 8px;
+        }
+
+        .stat-item { text-align: center; flex: 1; }
+
+        .stat-num {
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-lbl {
+            font-size: clamp(0.6rem, 1.6vw, 0.7rem);
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* ===== زر الدخول ===== */
+        .explore-btn {
+            width: 100%;
+            padding: clamp(12px, 3vw, 15px) 0;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8, #10b981);
+            background-size: 200% 200%;
+            color: #0f172a;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            animation: gradientShift 4s ease infinite;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            text-decoration: none;
+        }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .explore-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shineEffect 3.5s infinite linear;
+        }
+
+        @keyframes shineEffect {
+            0%   { left: -100%; }
+            20%  { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 35px rgba(56, 189, 248, 0.45);
+        }
+
+        .explore-btn:active { transform: translateY(-1px); }
+
+        .arrow-svg {
+            width: clamp(15px, 3vw, 18px);
+            height: clamp(15px, 3vw, 18px);
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            transition: transform 0.3s ease;
+            transform: scaleX(-1);
+            flex-shrink: 0;
+        }
+
+        .explore-btn:hover .arrow-svg { transform: scaleX(-1) translateX(4px); }
+
+        /* ===== فوتر ===== */
+        .system-status {
+            margin-top: clamp(18px, 3vw, 28px);
+            font-size: clamp(0.65rem, 1.5vw, 0.72rem);
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+
+        .status-dot {
+            width: 6px; height: 6px;
+            background-color: var(--accent-1);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-1);
+            animation: blink 1.8s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.3; }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 360px) {
+            body { padding: 16px 12px; }
+            .main-card { padding: 24px 16px; border-radius: 16px; }
+            .stats-row { gap: 4px; }
+            .stat-lbl { font-size: 0.58rem; }
+        }
+
+        @media (min-width: 768px) { .main-card { max-width: 480px; } }
+        @media (min-width: 1024px) { .main-card { max-width: 460px; } }
+        @media (min-width: 1440px) { html { font-size: 17px; } }
+
+        @media (max-height: 600px) and (orientation: landscape) {
+            body { align-items: flex-start; padding-top: 20px; }
+            .icon-wrap { margin-bottom: 10px; }
+            .rocket-icon { font-size: 2rem; }
+            .main-card { padding: 20px 30px; }
+            p.desc { margin-bottom: 16px; }
+            .stats-row { margin-bottom: 16px; padding: 10px 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+
+        <div class="icon-wrap">
+            <span class="rocket-icon">🚀</span>
+        </div>
+
+        <div class="welcome-badge">
+            المنصة جاهزة
+        </div>
+
+        <h1>موسوعة ريادة الأعمال</h1>
+        <p class="subtitle">Entrepreneurship Encyclopedia</p>
+        <p class="desc">بوابتك التفاعلية لعالم الأفكار، النماذج، والاستراتيجيات الريادية — مصمَّمة للجيل القادم من رواد الأعمال.</p>
+
+        <div class="stats-row">
+            <div class="stat-item">
+                <span class="stat-num">+100</span>
+                <span class="stat-lbl">مفهوم ريادي</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">5</span>
+                <span class="stat-lbl">وحدة دراسية</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-num">∞</span>
+                <span class="stat-lbl">فرص النمو</span>
+            </div>
+        </div>
+
+        <a href="main.html" class="explore-btn">
+            <span>ابدأ رحلتك الريادية</span>
+            <svg class="arrow-svg" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            <span>النظام يعمل بكفاءة كاملة</span>
+        </div>
+
+    </div>
+
+    <script>
+        const colors = ['#38bdf8','#10b981','#f59e0b'];
+        for(let i = 0; i < 18; i++){
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random()*4+2;
+            p.style.cssText = `
+                width:${size}px;height:${size}px;
+                left:${Math.random()*100}%;
+                background:${colors[Math.floor(Math.random()*colors.length)]};
+                animation-duration:${Math.random()*12+8}s;
+                animation-delay:${Math.random()*8}s;
+            `;
+            document.body.appendChild(p);
+        }
+    </script>
+
+</body>
+</html>
