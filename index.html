@@ -81,6 +81,75 @@
             to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
+        /* ===== بسم الله ما شاء الله ===== */
+        .basmala-wrap {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: clamp(14px, 3vw, 20px);
+        }
+
+        .basmala-stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .basmala-star {
+            position: absolute;
+            color: var(--accent-2);
+            font-size: 13px;
+            animation: bStarTwinkle 1.6s ease-in-out infinite alternate;
+        }
+
+        .basmala-star:nth-child(1) { top: -4px; right: -2px; animation-delay: 0s; }
+        .basmala-star:nth-child(2) { top: -4px; left: -2px; animation-delay: 0.5s; }
+        .basmala-star:nth-child(3) { bottom: -4px; right: 12%; animation-delay: 0.9s; }
+        .basmala-star:nth-child(4) { bottom: -4px; left: 12%; animation-delay: 0.3s; }
+
+        @keyframes bStarTwinkle {
+            from { opacity: 0.3; transform: scale(0.7); }
+            to   { opacity: 1;   transform: scale(1.3); }
+        }
+
+        .basmala-text {
+            font-family: 'Cairo', sans-serif;
+            font-size: clamp(1.05rem, 3.5vw, 1.35rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg,
+                #f59e0b 0%,
+                #fde68a 25%,
+                #10b981 50%,
+                #38bdf8 75%,
+                #f59e0b 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: basmalaSweep 3.5s ease infinite,
+                       basmalaGlow  2.2s ease-in-out infinite alternate;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes basmalaSweep {
+            0%   { background-position: 0%   50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0%   50%; }
+        }
+
+        @keyframes basmalaGlow {
+            from { filter: drop-shadow(0 0 5px rgba(245,158,11,0.55))
+                           drop-shadow(0 0 12px rgba(56,189,248,0.35)); }
+            to   { filter: drop-shadow(0 0 14px rgba(245,158,11,0.95))
+                           drop-shadow(0 0 26px rgba(56,189,248,0.75))
+                           drop-shadow(0 0 40px rgba(16,185,129,0.45)); }
+        }
+
+        /* ===== باقي الستايل ===== */
         .icon-wrap {
             display: flex;
             justify-content: center;
@@ -171,7 +240,6 @@
             white-space: nowrap;
         }
 
-        /* ===== لينك المفاهيم ===== */
         .stat-link {
             text-decoration: none;
             display: flex;
@@ -181,9 +249,7 @@
             transition: all 0.25s ease;
         }
 
-        .stat-link .stat-num {
-            transition: all 0.25s ease;
-        }
+        .stat-link .stat-num { transition: all 0.25s ease; }
 
         .stat-link .stat-lbl {
             color: var(--primary);
@@ -202,7 +268,6 @@
             border-bottom-color: #fff;
         }
 
-        /* ===== زر الدخول ===== */
         .explore-btn {
             width: 100%;
             padding: clamp(12px, 3vw, 15px) 0;
@@ -325,6 +390,17 @@
 
     <div class="main-card">
 
+        <!-- ✨ بسم الله ما شاء الله -->
+        <div class="basmala-wrap">
+            <div class="basmala-stars">
+                <span class="basmala-star">✦</span>
+                <span class="basmala-star">✦</span>
+                <span class="basmala-star">✦</span>
+                <span class="basmala-star">✦</span>
+            </div>
+            <span class="basmala-text">بسم الله ما شاء الله</span>
+        </div>
+
         <div class="icon-wrap">
             <span class="rocket-icon">🚀</span>
         </div>
@@ -336,27 +412,20 @@
         <p class="desc">بوابتك التفاعلية لعالم الأفكار، النماذج، والاستراتيجيات الريادية — مصمَّمة للجيل القادم من رواد الأعمال.</p>
 
         <div class="stats-row">
-
-            <!-- مفهوم ريادي — قابل للضغط -->
             <div class="stat-item">
                 <a href="idea.html" class="stat-link">
                     <span class="stat-num">+18</span>
                     <span class="stat-lbl">مفهوم ريادي</span>
                 </a>
             </div>
-
-            <!-- وحدة دراسية -->
             <div class="stat-item">
                 <span class="stat-num">5</span>
                 <span class="stat-lbl">وحدة دراسية</span>
             </div>
-
-            <!-- فرص النمو -->
             <div class="stat-item">
                 <span class="stat-num">∞</span>
                 <span class="stat-lbl">فرص النمو</span>
             </div>
-
         </div>
 
         <a href="main.html" class="explore-btn">
