@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة من القلب</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cairo', sans-serif;
+            /* خلفية هادئة ومتدرجة كما في الصورة */
+            background: radial-gradient(circle at 70% 30%, #3b82f644 0%, #1e1b4b 50%, #7c3aed44 100%), 
+                        linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        h1 { color: #ffffff; margin-bottom: 25px; font-weight: 700; }
+        
+        .glowing-heart {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.4));
+        }
+
+        .text { color: #f1f5f9; font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; }
+
+        .btn {
+            background: linear-gradient(90deg, #3b82f6, #a855f7, #ec4899);
+            border: none;
+            padding: 12px 40px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        .back-link { 
+            margin-top: 25px; 
+            color: #94a3b8; 
+            text-decoration: none; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>دعوة من القلب</h1>
+        <span class="glowing-heart">💖</span>
+        <div class="text">
+            اللهم ارزق إبراهيم زيادة زوجةً صالحة، تُقرّ بها عينه، وتكون له سكناً ومودة.
+        </div>
+        <button class="btn" onclick="triggerEffect()">آمين 🤲🏻</button>
+    </div>
+
+    <a href="index.html" class="back-link">العودة للموسوعة 🚀</a>
+
+    <script>
+        function triggerEffect() {
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#3b82f6', '#a855f7', '#ec4899']
+            });
+            const btn = document.querySelector('.btn');
+            btn.innerHTML = "تقبل الله دعاءك ✨";
+            btn.style.background = "#10b981";
+        }
+    </script>
+</body>
+</html>
