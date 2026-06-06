@@ -18,7 +18,6 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { font-size: 16px; }
 
         body {
@@ -35,20 +34,18 @@
             overflow-x: hidden;
         }
 
-        /* شبكة خلفية */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             background-image:
-                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
             background-size: 35px 35px;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* جزيئات عائمة */
         .particle {
             position: fixed;
             border-radius: 50%;
@@ -65,7 +62,6 @@
             100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* ===== الكارت الرئيسي ===== */
         .main-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
@@ -73,7 +69,7 @@
             border-radius: clamp(18px, 3vw, 28px);
             width: 100%;
             max-width: 460px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             text-align: center;
             position: relative;
             z-index: 1;
@@ -82,10 +78,9 @@
 
         @keyframes cardEntrance {
             from { opacity: 0; transform: translateY(35px) scale(0.97); filter: blur(10px); }
-            to   { opacity: 1; transform: translateY(0)   scale(1);    filter: blur(0); }
+            to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
-        /* ===== أيقونة الصاروخ ===== */
         .icon-wrap {
             display: flex;
             justify-content: center;
@@ -101,18 +96,16 @@
 
         .rocket-icon {
             font-size: clamp(2.4rem, 6vw, 3.4rem);
-            filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.6));
+            filter: drop-shadow(0 0 18px rgba(56,189,248,0.6));
         }
 
-        /* ===== شارة الحالة ===== */
         .welcome-badge {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 7px;
             padding: 6px 16px;
-            background: rgba(56, 189, 248, 0.08);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: rgba(56,189,248,0.08);
+            border: 1px solid rgba(56,189,248,0.25);
             color: var(--primary);
             border-radius: 100px;
             font-size: clamp(0.65rem, 1.8vw, 0.75rem);
@@ -124,11 +117,10 @@
         }
 
         @keyframes pulseBadge {
-            0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); }
-            50%       { box-shadow: 0 0 28px rgba(56, 189, 248, 0.3); }
+            0%, 100% { box-shadow: 0 0 15px rgba(56,189,248,0.1); }
+            50%       { box-shadow: 0 0 28px rgba(56,189,248,0.3); }
         }
 
-        /* ===== العنوان ===== */
         h1 {
             font-size: clamp(1.6rem, 5vw, 2.3rem);
             font-weight: 900;
@@ -153,7 +145,6 @@
             font-weight: 400;
         }
 
-        /* ===== إحصائيات ===== */
         .stats-row {
             display: flex;
             justify-content: space-around;
@@ -180,6 +171,37 @@
             white-space: nowrap;
         }
 
+        /* ===== لينك المفاهيم ===== */
+        .stat-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.25s ease;
+        }
+
+        .stat-link .stat-num {
+            transition: all 0.25s ease;
+        }
+
+        .stat-link .stat-lbl {
+            color: var(--primary);
+            border-bottom: 1px dashed rgba(56,189,248,0.5);
+            padding-bottom: 1px;
+            transition: all 0.25s ease;
+        }
+
+        .stat-link:hover .stat-num {
+            transform: scale(1.15);
+            text-shadow: 0 0 12px rgba(56,189,248,0.6);
+        }
+
+        .stat-link:hover .stat-lbl {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+
         /* ===== زر الدخول ===== */
         .explore-btn {
             width: 100%;
@@ -193,7 +215,7 @@
             font-weight: 800;
             font-family: 'Cairo', sans-serif;
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 8px 25px rgba(56,189,248,0.3);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             justify-content: center;
@@ -230,7 +252,7 @@
 
         .explore-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 35px rgba(56, 189, 248, 0.45);
+            box-shadow: 0 14px 35px rgba(56,189,248,0.45);
         }
 
         .explore-btn:active { transform: translateY(-1px); }
@@ -248,7 +270,6 @@
 
         .explore-btn:hover .arrow-svg { transform: scaleX(-1) translateX(4px); }
 
-        /* ===== فوتر ===== */
         .system-status {
             margin-top: clamp(18px, 3vw, 28px);
             font-size: clamp(0.65rem, 1.5vw, 0.72rem);
@@ -275,7 +296,6 @@
             50%       { opacity: 0.3; }
         }
 
-        /* ===== Responsive ===== */
         @media (max-width: 360px) {
             body { padding: 16px 12px; }
             .main-card { padding: 24px 16px; border-radius: 16px; }
@@ -283,7 +303,7 @@
             .stat-lbl { font-size: 0.58rem; }
         }
 
-        @media (min-width: 768px) { .main-card { max-width: 480px; } }
+        @media (min-width: 768px)  { .main-card { max-width: 480px; } }
         @media (min-width: 1024px) { .main-card { max-width: 460px; } }
         @media (min-width: 1440px) { html { font-size: 17px; } }
 
@@ -309,27 +329,34 @@
             <span class="rocket-icon">🚀</span>
         </div>
 
-        <div class="welcome-badge">
-            المنصة جاهزة
-        </div>
+        <div class="welcome-badge">المنصة جاهزة</div>
 
         <h1>موسوعة ريادة الأعمال</h1>
         <p class="subtitle">Entrepreneurship Encyclopedia</p>
         <p class="desc">بوابتك التفاعلية لعالم الأفكار، النماذج، والاستراتيجيات الريادية — مصمَّمة للجيل القادم من رواد الأعمال.</p>
 
         <div class="stats-row">
+
+            <!-- مفهوم ريادي — قابل للضغط -->
             <div class="stat-item">
-                <span class="stat-num">+100</span>
-                <span class="stat-lbl">مفهوم ريادي</span>
+                <a href="idea.html" class="stat-link">
+                    <span class="stat-num">+18</span>
+                    <span class="stat-lbl">مفهوم ريادي</span>
+                </a>
             </div>
+
+            <!-- وحدة دراسية -->
             <div class="stat-item">
                 <span class="stat-num">5</span>
                 <span class="stat-lbl">وحدة دراسية</span>
             </div>
+
+            <!-- فرص النمو -->
             <div class="stat-item">
                 <span class="stat-num">∞</span>
                 <span class="stat-lbl">فرص النمو</span>
             </div>
+
         </div>
 
         <a href="main.html" class="explore-btn">
