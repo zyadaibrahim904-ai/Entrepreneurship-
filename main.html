@@ -39,7 +39,7 @@
             max-width: 560px;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: clamp(18px, 4vw, 28px);
+            margin-bottom: 6px;
             text-decoration: none;
             display: block;
             position: relative;
@@ -78,9 +78,11 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            text-align: center;
             gap: 16px;
-            padding: clamp(18px, 4vw, 26px) clamp(20px, 5vw, 32px);
+            /* ===== التعديل الوحيد: زيادة الـ padding فوق وتحت ===== */
+            padding: 0 clamp(20px, 5vw, 32px);
             background: rgba(15, 23, 42, 0.55);
             backdrop-filter: blur(2px);
             border: 1px solid rgba(255,255,255,0.08);
@@ -96,7 +98,7 @@
         .dua-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 3px;
             flex: 1;
         }
 
@@ -123,9 +125,8 @@
             margin-bottom: 5px;
         }
 
-        /* تم تعديل حجم الخط هنا */
         .dua-text {
-             
+            font-size: clamp(0.5rem, 1.2vw, 0.65rem);
             font-weight: 500;
             color: #fff;
             line-height: 1;
@@ -163,7 +164,7 @@
         .top-nav {
             flex-direction: column;
             align-items: center;
-            margin-bottom: clamp(20px, 4vw, 30px);
+            margin-bottom: 0px;
             width: 100%;
         }
 
@@ -177,12 +178,12 @@
             font-size: clamp(0.78rem, 2vw, 0.9rem);
             border: 1px solid rgba(34,197,94,0.2);
             line-height: 1.8;
-            margin-bottom: clamp(16px, 3vw, 24px);
+            margin-bottom: 6px;
         }
 
         header {
             text-align: center;
-            margin-bottom: clamp(28px, 5vw, 44px);
+            margin-bottom: 10px;
             animation: fadeInDown 0.9s ease;
         }
 
@@ -222,7 +223,7 @@
             background: var(--card-bg);
             border-radius: clamp(14px, 2.5vw, 20px);
             padding: clamp(18px, 4vw, 28px);
-            margin-bottom: clamp(16px, 3vw, 24px);
+            margin-bottom: 6px;
             box-shadow: 0 6px 30px rgba(0,0,0,0.4);
             border: 1px solid var(--border);
             transition: transform 0.3s ease, border-color 0.3s ease;
@@ -316,7 +317,7 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 3px;
             padding: 8px 18px;
             border: 2px solid var(--primary);
             border-radius: 12px;
@@ -341,14 +342,13 @@
     <a href="love.html" class="dua-banner">
         <canvas id="duaCanvas"></canvas>
         <div class="dua-content">
-            <div class="dua-left">
-                <span class="dua-emoji">🤍</span>
-                    <span class="dua-text">اللهم ارزق إبراهيم زيادة زوجةً صالحة  🤲🏻</span>
-                    <p style="color: #2162ae; font-size: 12px; text-align: right; direction: rtl; cursor: pointer;">⤴️ اضغط للدخول</p>
-                </div>
+            <divclass="top-nav">
+                    <span class="dua-text">اللهم ارزق إبراهيم زيادة زوجةً صالحة  🤲🏻</span><br>
+                   <p style="color: #2162ae; font-size: 12px; text-align: right; direction: rtl; cursor: pointer;">⤴️ اضغط للدخول</p>
+
+                </divclass=>
             </div>
-        </div>
-    </a>
+     </a>
 
      <div class="top-nav">
         <br>
@@ -437,7 +437,7 @@
         <p class="axis-desc">تعلَّم كيف تدرس السوق المستهدف وتحدِّد شريحة عملائك المثالية، وتستخدم أدوات التحليل كنموذج بورتر والـ SWOT لاتخاذ قرارات ذكية.</p>
         <div class="links-container">
             <a href="https://drive.google.com/file/d/1iGHYpu_GeKyyk_Kl2PSN6qSnaJQCA5nN/view?usp=sharing" class="btn-link link-file"><span class="link-icon">📄</span> الملف الدراسي</a>
-            <a href="#" class="btn-link link-video"><span class="link-icon">🎬</span> شرح الفيديو - NotebookLM</a>
+            <a href="https://notebooklm.google.com/notebook/76ec7ccd-6c8c-4566-b879-4894d769bbbc/artifact/5348c1ec-0bea-4d56-ae4f-fa8ca75ee66e?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_" class="btn-link link-video"><span class="link-icon">🎬</span> شرح الفيديو - NotebookLM</a>
             <a href="https://notebooklm.google.com/notebook/76ec7ccd-6c8c-4566-b879-4894d769bbbc/artifact/ce9ec429-0ef9-4432-ae3d-ba7dce3596f9?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_" class="btn-link link-questions"><span class="link-icon">📝</span> بنك الأسئلة</a>
         </div>
     </div>
