@@ -422,6 +422,51 @@
             box-shadow: 0 6px 20px rgba(239,68,68,0.2);
         }
 
+        /* ===== زر عرض الكل ===== */
+        .showall-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background: rgba(30, 41, 59, 0.92);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .showall-btn:hover {
+            background: rgba(56,189,248,0.12);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56,189,248,0.2);
+        }
+        .showall-btn.active {
+            background: rgba(16,185,129,0.12);
+            border-color: var(--accent-1);
+            color: var(--accent-1);
+        }
+        .showall-btn.active:hover {
+            background: rgba(16,185,129,0.2);
+            box-shadow: 0 6px 20px rgba(16,185,129,0.2);
+        }
+
+        /* ===== إخفاء المحاور المكتملة ===== */
+        .axis-card.done:not(.force-show) {
+            display: none;
+        }
+
         /* ===== نظام القفل ===== */
         .axis-locked {
             display: none;
@@ -446,9 +491,8 @@
     <a href="love.html" class="dua-banner">
         <canvas id="duaCanvas"></canvas>
         <div class="dua-content">
-            <br><br>
-            <span class="dua-text">اللهم ارزق إبراهيم زيادة زوجةً صالحة 🤲🏻</span>
-            
+            <br>
+            <span class="dua-text">اللهم ارزق إبراهيم زيادة زوجةً صالحة 🤲🏻</span><br>
         </div>
     </a>
 
@@ -571,6 +615,9 @@
 
     <!-- زر إعادة الضبط العائم -->
     <button class="reset-btn" id="resetBtn">🔄 إعادة ضبط</button>
+
+    <!-- زر عرض الكل العائم -->
+    <button class="showall-btn" id="showAllBtn">👁️ عرض الكل</button>
 
     <script>
         // ===== كانفاس البانر =====
@@ -754,6 +801,7 @@
         }
         refreshVisibility(progress, false);
         updateProgressBar(progress);
+        updateShowAllBtn();
 
         // ===== كونفيتي احتفالي =====
         function launchConfetti(originEl) {
@@ -804,6 +852,7 @@
                 const shouldAnimate = !wasDone;
                 refreshVisibility(progress, shouldAnimate);
                 updateProgressBar(progress);
+                updateShowAllBtn();
 
                 // تأثير pop على البطاقة الحالية
                 const card = document.querySelector(`.axis-card[data-axis="${axis}"]`);
@@ -814,6 +863,25 @@
             });
         });
 
+        // زر عرض الكل
+        let showingAll = false;
+        const showAllBtn = document.getElementById('showAllBtn');
+
+        function updateShowAllBtn() {
+            const hasDone = Object.values(progress).some(Boolean);
+            showAllBtn.style.display = hasDone ? 'flex' : 'none';
+        }
+
+        showAllBtn.addEventListener('click', function() {
+            showingAll = !showingAll;
+            document.querySelectorAll('.axis-card.done').forEach(card => {
+                if (showingAll) card.classList.add('force-show');
+                else card.classList.remove('force-show');
+            });
+            this.classList.toggle('active', showingAll);
+            this.innerHTML = showingAll ? '🙈 إخفاء المكتمل' : '👁️ عرض الكل';
+        });
+
         // زر إعادة الضبط
         document.getElementById('resetBtn').addEventListener('click', function() {
             if (confirm('هل أنت متأكد من إعادة ضبط كل التقدم؟')) {
@@ -822,6 +890,10 @@
                 for (let i = 1; i <= TOTAL_AXES; i++) applyStateToCard(i, false);
                 refreshVisibility(progress, false);
                 updateProgressBar(progress);
+                showingAll = false;
+                showAllBtn.classList.remove('active');
+                showAllBtn.innerHTML = '👁️ عرض الكل';
+                updateShowAllBtn();
             }
         });
     </script>
