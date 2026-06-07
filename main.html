@@ -514,6 +514,59 @@
         @media (max-width: 360px) { body { padding: 12px 10px; } .btn-link { gap: 8px; } }
         @media (max-width: 599px) { .links-container { flex-direction: column; } }
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; } }
+        nav {
+  background-color: #3bb4ff;
+  padding: 12px 30px;          /* تقليل الهامش الرأسي ليصبح أنحف وأجمل */
+  text-align: center;
+  
+  /* التعديل لتقليل العرض وتوسيط الشريط */
+  display: inline-block;       /* تجعل حجم الخلفية يتناسب تماماً مع حجم الروابط بالداخل */
+  min-width: 300px;            /* الحد الأدنى للعرض */
+  max-width: 600px;            /* الحد الأقصى للعرض لكي لا يتمدد بشكل ضخم */
+  border-radius: 50px;         /* حواف دائرية ناعمة لتجعله يبدو كزر تفاعلي عصري */
+  
+  /* لتوسيط شريط التنقل بالكامل في منتصف الصفحة */
+  margin: 20px auto;           
+  display: block;              /* نغيرها إلى block مع الـ margin auto لضمان التوسيط */
+  width: fit-content;          /* تجعل العرض "على مقاس" المحتوى تماماً وبذكاء */
+}
+
+nav a {
+  color: rgb(244, 233, 233);
+  text-decoration: none;
+  font-size: 18px;             /* تصغير الخط قليلاً (من 20px إلى 18px) ليناسب العرض الجديد */
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 15px;
+  position: relative;          
+  padding-bottom: 5px;         
+  transition: color 0.3s ease;
+}
+
+/* التعديل عند تمرير الماوس */
+
+
+/* التعديل: تحويل اللون الأصفر الفاتح بدلاً من الأزرق ليتناسق تماماً مع الخلفية الحمراء */
+nav a:hover {
+  color: #f62e01; 
+}
+/* إضافة اختيارية: تأثير خط سفلي يظهر بنعومة عند تمرير الماوس */
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0c10e7;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+
     </style>
 </head>
 <body>
@@ -631,6 +684,14 @@
             <button class="done-btn" data-axis="5">☑️ أنهيت هذا المحور</button>
             <button class="back-btn" data-axis="5">↩️ رجوع للمحور الرابع</button>
         </div>
+         <nav>
+            <a href="https://drive.google.com/file/d/1fcCYPhmB5XgQBGyFu8Yt3L6Owmst5u7T/view?usp=sharing" class="dua-banner">
+        <canvas id="duaCanvas"></canvas>
+        <div class="dua-content">
+                <span class="dua-text" > اسئلة متوقعة في الامتحان باذن الله🥰</span><br>
+        </div>
+    </a>
+        </nav>
 
         <!-- FOOTER -->
         <footer>
