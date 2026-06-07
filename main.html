@@ -95,7 +95,7 @@
         }
 
         .dua-text {
-            font-size: clamp(0.75rem, 1.8vw, 1rem);
+            font-size: clamp(0.5rem, 1.2vw, 0.65rem);
             font-weight: 500;
             color: #fff;
             line-height: 1;
@@ -462,6 +462,36 @@
             box-shadow: 0 6px 20px rgba(16,185,129,0.2);
         }
 
+        /* ===== زر الرجوع للمحور السابق ===== */
+        .back-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: clamp(9px, 2vw, 11px) 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(148,163,184,0.2);
+            background: rgba(148,163,184,0.05);
+            color: var(--text-muted);
+            font-family: 'Cairo', sans-serif;
+            font-size: clamp(0.8rem, 2vw, 0.88rem);
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(148,163,184,0.12);
+            border-color: rgba(148,163,184,0.4);
+            color: var(--text-main);
+        }
+
+        .axis-card.show-back .back-btn {
+            display: flex;
+        }
+
         /* ===== إخفاء المحاور المكتملة ===== */
         .axis-card.done:not(.force-show) {
             display: none;
@@ -491,7 +521,7 @@
     <a href="love.html" class="dua-banner">
         <canvas id="duaCanvas"></canvas>
         <div class="dua-content">
-                <span class="dua-text">اللهم ارزق إبراهيم زيادة زوجةً صالحة 🤲🏻</span><br>
+            <span class="dua-text">اللهم ارزق إبراهيم زيادة زوجةً صالحة 🤲🏻</span><br>
         </div>
     </a>
 
@@ -545,6 +575,7 @@
                 <a href="https://notebooklm.google.com/notebook/dfbde106-9d5c-4cbc-827a-0a19039e4b43/artifact/15292809-6927-451d-a342-5f26950f6745" class="btn-link link-questions"><span class="link-icon">📝</span> بنك الأسئلة</a>
             </div>
             <button class="done-btn" data-axis="2">☑️ أنهيت هذا المحور</button>
+            <button class="back-btn" data-axis="2">↩️ رجوع للمحور الأول</button>
         </div>
 
         <!-- AXIS 3 -->
@@ -562,6 +593,7 @@
                 <a href="https://notebooklm.google.com/notebook/04bce09a-5b4c-4006-9346-837ae4f861ca/artifact/8599ddfb-a4d9-458e-9911-046b676d4599" class="btn-link link-questions"><span class="link-icon">📝</span> بنك الأسئلة</a>
             </div>
             <button class="done-btn" data-axis="3">☑️ أنهيت هذا المحور</button>
+            <button class="back-btn" data-axis="3">↩️ رجوع للمحور الثاني</button>
         </div>
 
         <!-- AXIS 4 -->
@@ -579,6 +611,7 @@
                 <a href="https://notebooklm.google.com/notebook/04bce09a-5b4c-4006-9346-837ae4f861ca/artifact/b73e4719-9672-45f0-9482-c23643e07180" class="btn-link link-questions"><span class="link-icon">📝</span> بنك الأسئلة</a>
             </div>
             <button class="done-btn" data-axis="4">☑️ أنهيت هذا المحور</button>
+            <button class="back-btn" data-axis="4">↩️ رجوع للمحور الثالث</button>
         </div>
 
         <!-- AXIS 5 -->
@@ -596,6 +629,7 @@
                 <a href="https://notebooklm.google.com/notebook/76ec7ccd-6c8c-4566-b879-4894d769bbbc/artifact/ce9ec429-0ef9-4432-ae3d-ba7dce3596f9" class="btn-link link-questions"><span class="link-icon">📝</span> بنك الأسئلة</a>
             </div>
             <button class="done-btn" data-axis="5">☑️ أنهيت هذا المحور</button>
+            <button class="back-btn" data-axis="5">↩️ رجوع للمحور الرابع</button>
         </div>
 
         <!-- FOOTER -->
@@ -756,8 +790,10 @@
                 const card = document.querySelector(`.axis-card[data-axis="${i}"]`);
                 if (!card) continue;
 
+                // إخفاء زر الرجوع من كل البطاقات أولاً
+                card.classList.remove('show-back');
+
                 if (i === 1) {
-                    // المحور الأول دايماً ظاهر
                     card.classList.remove('axis-locked');
                     continue;
                 }
@@ -775,6 +811,19 @@
                 } else {
                     card.classList.add('axis-locked');
                     card.classList.remove('force-show');
+                }
+            }
+
+            // أظهر زر الرجوع على المحور الحالي المفتوح (غير المكتمل وغير المقفول)
+            for (let i = 2; i <= TOTAL_AXES; i++) {
+                const card = document.querySelector(`.axis-card[data-axis="${i}"]`);
+                if (!card) continue;
+                const isLocked  = card.classList.contains('axis-locked');
+                const isDone    = !!data[i];
+                const prevDone  = !!data[i - 1];
+                if (!isLocked && !isDone && prevDone) {
+                    card.classList.add('show-back');
+                    break;
                 }
             }
         }
@@ -857,6 +906,24 @@
                     card.classList.add('popping');
                     card.addEventListener('animationend', () => card.classList.remove('popping'), { once: true });
                 }
+            });
+        });
+
+        // ===== أزرار الرجوع =====
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const axis = parseInt(this.dataset.axis);
+                const prevAxis = axis - 1;
+                // امسح المحور السابق من التقدم
+                delete progress[prevAxis];
+                saveProgress(progress);
+                for (let i = 1; i <= TOTAL_AXES; i++) applyStateToCard(i, !!progress[i]);
+                refreshVisibility(progress, null);
+                updateProgressBar(progress);
+                updateShowAllBtn(progress);
+                // scroll للمحور السابق
+                const prevCard = document.querySelector(`.axis-card[data-axis="${prevAxis}"]`);
+                if (prevCard) setTimeout(() => prevCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
             });
         });
 
