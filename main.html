@@ -81,7 +81,7 @@
             justify-content: center;
             text-align: center;
             gap: 16px;
-            padding: 0 clamp(20px, 5vw, 32px);
+            padding: clamp(16px, 4vw, 24px) clamp(20px, 5vw, 32px);
             background: rgba(15, 23, 42, 0.55);
             backdrop-filter: blur(2px);
             border: 1px solid rgba(255,255,255,0.08);
@@ -95,10 +95,10 @@
         }
 
         .dua-text {
-            font-size: clamp(0.5rem, 1.2vw, 0.65rem);
-            font-weight: 500;
+            font-size: clamp(0.72rem, 1.8vw, 0.88rem);
+            font-weight: 700;
             color: #fff;
-            line-height: 1;
+            line-height: 1.5;
             text-shadow: 0 0 20px rgba(251,113,133,0.4);
         }
 
@@ -930,11 +930,19 @@
         // ===== زر عرض الكل =====
         document.getElementById('showAllBtn').addEventListener('click', function() {
             showingAll = !showingAll;
-            document.querySelectorAll('.axis-card.done').forEach(card => {
-                card.classList.toggle('force-show', showingAll);
+            document.querySelectorAll('.axis-card').forEach(card => {
+                if (showingAll) {
+                    card.classList.remove('axis-locked');
+                    card.classList.add('force-show');
+                } else {
+                    card.classList.remove('force-show');
+                    // أعد تطبيق الحالة الصحيحة
+                    for (let i = 1; i <= TOTAL_AXES; i++) applyStateToCard(i, !!progress[i]);
+                    refreshVisibility(progress, null);
+                }
             });
             this.classList.toggle('active', showingAll);
-            this.innerHTML = showingAll ? '🙈 إخفاء المكتمل' : '👁️ عرض الكل';
+            this.innerHTML = showingAll ? '🙈 إخفاء' : '👁️ عرض الكل';
         });
 
         // ===== زر إعادة الضبط =====
